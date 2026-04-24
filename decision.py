@@ -98,6 +98,13 @@ plt.title("Decision Tree Boundary (Internships fixed)")
 plt.show()
 
 
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10,6))
+plot_tree(model, feature_names=["CGPA","IQ","Internships"], filled=True)
+plt.show()
+
 
 # ---------------- CONFUSION MATRIX ----------------
 y_pred = model.predict(X)
