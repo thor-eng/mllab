@@ -45,8 +45,18 @@ print("Cluster:", kmeans.predict(new_customer))
 print("Cluster Centers:\n", kmeans.cluster_centers_)
 
 # ---------------- GRAPH ----------------
-plt.scatter(df["AnnualIncome"], df["SpendingScore"], c=df["Cluster"])
+# plt.scatter(df["AnnualIncome"], df["SpendingScore"], c=df["Cluster"])
 
+# plt.scatter(
+#     kmeans.cluster_centers_[:,0],
+#     kmeans.cluster_centers_[:,1],
+#     marker='X',
+#     s=200
+# )
+
+labels = kmeans.fit_predict(X)
+
+plt.scatter(X[:,0], X[:,1], c=labels)
 plt.scatter(
     kmeans.cluster_centers_[:,0],
     kmeans.cluster_centers_[:,1],

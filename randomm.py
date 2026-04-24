@@ -28,8 +28,8 @@ else:
     ])
     y = np.array([0,0,1,1,1,1,0,1,1,1])
 
-    df = pd.DataFrame(X, columns=["CGPA","IQ","Internships"])
-    df["Placed"] = y
+    # df = pd.DataFrame(X, columns=["CGPA","IQ","Internships"])
+    # df["Placed"] = y
 
 # ---------------- MODEL ----------------
 rf = RandomForestClassifier(

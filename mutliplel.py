@@ -21,6 +21,16 @@ else:
     df = pd.DataFrame(data)
     X = df[["Area", "Bedrooms", "Age"]]
     y = df["Price"]
+    
+#     X = np.array([
+#     [800, 2, 20],
+#     [1000, 2, 15],
+#     [1200, 3, 10],
+#     [1500, 3, 8],
+#     [1800, 4, 5]
+# ])
+
+# y = np.array([40, 50, 65, 80, 100])
 
 # ---------------- MODEL ----------------
 model = LinearRegression()
@@ -39,7 +49,7 @@ print("Predicted House Price (in lakhs):", predicted_price)
 y_pred = model.predict(X)
 
 plt.scatter(y, y_pred)
-plt.plot([y.min(), y.max()], [y.min(), y.max()])
+plt.plot([y.min(), y.max()], [y.min(), y.max()] , color='red')
 
 plt.xlabel("Actual Price")
 plt.ylabel("Predicted Price")

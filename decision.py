@@ -52,8 +52,39 @@ else:
 print("Placed:", model.predict(new_student))
 
 # ---------------- GRAPH ----------------
+# cgpa = X[:, 0]
+# iq = X[:, 1]
+
+# for i in range(len(cgpa)):
+#     if y[i] == 0:
+#         plt.scatter(cgpa[i], iq[i], color='red')
+#     else:
+#         plt.scatter(cgpa[i], iq[i], color='green')
+
+# plt.xlabel("CGPA")
+# plt.ylabel("IQ")
+# plt.title("Placement (CGPA vs IQ)")
+# plt.show() 
+
+
 cgpa = X[:, 0]
 iq = X[:, 1]
+
+x_min, x_max = cgpa.min()-1, cgpa.max()+1
+y_min, y_max = iq.min()-5, iq.max()+5
+
+xx, yy = np.meshgrid(
+    np.linspace(x_min, x_max, 100),
+    np.linspace(y_min, y_max, 100)
+)
+
+# fix internships = 1 (better than 0)
+zz = np.ones_like(xx.ravel())
+
+Z = model.predict(np.c_[xx.ravel(), yy.ravel(), zz])
+Z = Z.reshape(xx.shape)
+
+plt.contourf(xx, yy, Z, alpha=0.3)
 
 for i in range(len(cgpa)):
     if y[i] == 0:
@@ -63,8 +94,10 @@ for i in range(len(cgpa)):
 
 plt.xlabel("CGPA")
 plt.ylabel("IQ")
-plt.title("Placement (CGPA vs IQ)")
+plt.title("Decision Tree Boundary (Internships fixed)")
 plt.show()
+
+
 
 # ---------------- CONFUSION MATRIX ----------------
 y_pred = model.predict(X)
@@ -138,17 +171,53 @@ print("F1 Score:", f1_score(y, y_pred))
 # print("Predicted Salary:", model.predict(new_student))
 
 # # ---------------- GRAPH (Actual vs Predicted) ----------------
-# y_pred = model.predict(X)
+# # y_pred = model.predict(X)
 
-# plt.scatter(y, y_pred)
-# plt.plot([y.min(), y.max()], [y.min(), y.max()])
+# # plt.scatter(y, y_pred)
+# # plt.plot([y.min(), y.max()], [y.min(), y.max()])
 
-# plt.xlabel("Actual Salary")
-# plt.ylabel("Predicted Salary")
-# plt.title("Decision Tree Regression")
+# # plt.xlabel("Actual Salary")
+# # plt.ylabel("Predicted Salary")
+# # plt.title("Decision Tree Regression")
+
+# # plt.show()
+
+# import matplotlib.pyplot as plt
+
+# plt.hist(y, bins=8)
+
+# plt.xlabel("Salary")   # or your target name
+# plt.ylabel("Frequency")
+# plt.title("Distribution of Target Variable")
 
 # plt.show()
 
 # # ---------------- METRICS ----------------
 # print("MSE:", mean_squared_error(y, y_pred))
 # print("R2 Score:", r2_score(y, y_pred))
+
+
+
+
+
+
+
+# # graph
+
+
+# # from mpl_toolkits.mplot3d import Axes3D
+# # import matplotlib.pyplot as plt
+
+# # fig = plt.figure()
+# # ax = fig.add_subplot(111, projection='3d')
+
+# # # color using y (Placed)
+# # colors = ['red' if val == 0 else 'green' for val in y]
+
+# # ax.scatter(X[:,0], X[:,1], X[:,2], c=colors)
+
+# # ax.set_xlabel("CGPA")
+# # ax.set_ylabel("IQ")
+# # ax.set_zlabel("Internships")
+
+# # plt.show()
