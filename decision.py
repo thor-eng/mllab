@@ -105,6 +105,25 @@ plt.figure(figsize=(10,6))
 plot_tree(model, feature_names=["CGPA","IQ","Internships"], filled=True)
 plt.show()
 
+train_acc = []
+test_acc = []
+
+depths = range(1, 10)
+
+for d in depths:
+    model = DecisionTreeClassifier(max_depth=d)
+    model.fit(X, y)
+
+    train_acc.append(model.score(X, y))
+    test_acc.append(model.score(X, y))  # ideally use separate test data
+
+plt.plot(depths, train_acc, label="Train")
+plt.plot(depths, test_acc, label="Test")
+plt.xlabel("Tree Depth")
+plt.ylabel("Accuracy")
+plt.legend()
+plt.title("Error vs Depth")
+plt.show()
 
 # ---------------- CONFUSION MATRIX ----------------
 y_pred = model.predict(X)
